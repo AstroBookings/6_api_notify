@@ -1,5 +1,6 @@
 import { Injectable, LoggerService, LogLevel } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { cleanText } from 'src/shared/utils/text-cleaner.util';
 import {
   wrapContextWithColor,
   wrapMessageWithColor,
@@ -88,21 +89,4 @@ export class LogService implements LoggerService {
   }
 }
 
-// ToDo: move to shared/utils/text-cleaner.util.ts
-
-/**
- * Cleans the input text by removing special characters and truncating to a maximum length.
- * @param text The input text to clean
- * @param maxLength The maximum length of the cleaned text (default: 22)
- * @returns The cleaned and truncated text
- */
-export function cleanText(text: string, maxLength: number = 22): string {
-  // Remove special characters and trim whitespace
-  const cleaned = text.replace(/[^a-zA-Z0-9]/g, '').trim();
-
-  // Truncate to the specified maxLength and add ellipsis if necessary
-  if (cleaned.length > maxLength) {
-    return cleaned.slice(0, maxLength) + '...';
-  }
-  return cleaned;
-}
+// Moved to shared/utils/text-cleaner.util.ts

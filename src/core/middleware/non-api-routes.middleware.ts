@@ -11,7 +11,8 @@ const ALLOWED_PREFIXES = ['/api/', '/docs/'];
  * @param next - The next middleware function in the chain
  */
 export function nonApiRoutesMiddleware(req: Request, res: Response, next: NextFunction) {
-  const isAllowedPath = ALLOWED_PREFIXES.some((prefix) => req.path.startsWith(prefix));
+  const { originalUrl } = req;
+  const isAllowedPath = ALLOWED_PREFIXES.some((prefix) => originalUrl.includes(prefix));
   if (!isAllowedPath) {
     return res.status(204).send();
   }
