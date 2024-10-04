@@ -14,6 +14,7 @@ import { envFilePath } from './core/config/config.util';
 import { LogFilter } from './core/log/log.filter';
 import { logMiddleware } from './core/log/log.middleware';
 import { LogService } from './core/log/log.service';
+import { nonApiRoutesMiddleware } from './core/middleware/non-api-routes.middleware';
 
 /**
  * Configuration options for the ConfigModule
@@ -63,7 +64,7 @@ export class AppModule implements NestModule {
    * @param consumer - The MiddlewareConsumer to apply middleware
    */
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(logMiddleware).forRoutes('*');
+    consumer.apply(nonApiRoutesMiddleware).forRoutes('*').apply(logMiddleware).forRoutes('api/*');
     new Logger('AppModule').log('AppModule configured');
   }
 }

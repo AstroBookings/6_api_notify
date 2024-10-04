@@ -3,10 +3,18 @@ import { CreateNotificationDto } from './models/create-notification.dto';
 import { NotificationDto } from './models/notification.dto';
 
 /**
- * Service for managing notifications
+ * Abstract service for managing notifications
+ */
+export abstract class NotificationsService {
+  abstract getAllPending(): NotificationDto[];
+  abstract create(notification: CreateNotificationDto): NotificationDto[];
+}
+
+/**
+ * Fake in-memory implementation of NotificationsService
  */
 @Injectable()
-export class NotificationsService {
+export class NotificationsFakeService extends NotificationsService {
   /**
    * Get all pending notifications
    * @returns {NotificationDto[]} - An array of notification DTOs
