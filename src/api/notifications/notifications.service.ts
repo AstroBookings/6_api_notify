@@ -57,13 +57,26 @@ export class NotificationsService {
    * @param {CreateNotificationDto} notification - The notification data transfer object
    * @returns {NotificationDto[]} - An array of notification DTOs
    */
-  create(notification: CreateNotificationDto) {
+  create(notification: CreateNotificationDto): NotificationDto[] {
     // Gets template from templateId
     // Gets source and recipient from data
     // For each recipient:
     // - Fill subject and message from template
     // - Save notification
     // - Return notification array
-    return `Creates a new notification with template ${notification.templateId} for user ${notification.userId}`;
+    return [
+      {
+        id: 'ntf_123',
+        templateId: notification.templateId,
+        userId: notification.userId,
+        data: notification.data,
+        message: 'Hello, John! Your booking bkn_123 is scheduled.',
+        subject: 'Booking Scheduled',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        recipient: 'john@example.com',
+        status: 'pending',
+      },
+    ];
   }
 }

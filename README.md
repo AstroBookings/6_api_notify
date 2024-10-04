@@ -17,13 +17,12 @@ Manages the notification system for the entire platform, handling email notifica
 
 ---
 
-## [🚀 AstroBookings for AirBus](https://gitlab.services.studio.airbushelicopters.com/ah-espana/astrobooking-bootcamp)
+## [🚀 AstroBookings](https://github.com/AstroBookings/.github/blob/main/profile/README.md)
 
-- [System Architecture](https://gitlab.services.studio.airbushelicopters.com/ah-espana/astrobooking-bootcamp/docs/-/blob/master/astrobookings/2-design/2-system.architecture.md)
-- [Model ERD](https://gitlab.services.studio.airbushelicopters.com/ah-espana/astrobooking-bootcamp/docs/-/blob/master/astrobookings/2-design/3-model.erd.md)
-- [Solution Domains](https://gitlab.services.studio.airbushelicopters.com/ah-espana/astrobooking-bootcamp/docs/-/blob/master/astrobookings/2-design/4-solution.domain.md)
+- [System Architecture](https://github.com/AstroBookings/.github/blob/main/profile/2-design/2-system.architecture.md))
+- [Model ERD](https://github.com/AstroBookings/.github/blob/main/profile/2-design/3-model.erd.md)
 
-- [Notification Domain](https://gitlab.services.studio.airbushelicopters.com/ah-espana/astrobooking-bootcamp/docs/-/blob/master/astrobookings/2-design/4_6-notification-system.domain.md?ref_type=heads)
+- [Notification Domain](https://github.com/AstroBookings/.github/blob/main/profile/2-design/4_4-notification-system.domain.md)
 
 ---
 
