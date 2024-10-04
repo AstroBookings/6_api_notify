@@ -13,6 +13,13 @@ import { NotificationsService } from './notifications.service';
 export class NotificationsController {
   constructor(private readonly notificationsService: NotificationsService) {}
 
+  @Get('ping')
+  @ApiOperation({ summary: 'Ping the notifications endpoint' })
+  @ApiResponse({ status: 200, description: 'Returns pong' })
+  ping(): string {
+    return 'pong';
+  }
+
   @Get()
   @ApiOperation({ summary: 'Get all notifications not sent yet' })
   @ApiResponse({
@@ -33,7 +40,7 @@ export class NotificationsController {
     isArray: true,
     type: NotificationDto,
   })
-  create(@Body() createNotification: CreateNotificationDto) {
+  create(@Body() createNotification: CreateNotificationDto): NotificationDto[] {
     return this.notificationsService.create(createNotification);
   }
 }
