@@ -19,7 +19,7 @@ export function getAppConfig(app: INestApplication): AppConfig {
   const configService = app.get(ConfigService);
   return {
     host: configService.get<string>('APP_HOST') || 'localhost',
-    port: configService.get<number>('APP_PORT') || 3000,
+    port: configService.get<number>('APP_PORT') || 3006,
     appName: configService.get<string>('APP_NAME') || 'API',
     appTitle: configService.get<string>('APP_TITLE') || 'A.P.I.',
     appDescription: configService.get<string>('APP_DESCRIPTION') || 'The API.',

@@ -27,7 +27,7 @@ export class NotificationsController {
     description: 'The array of notifications not sent yet',
     type: [NotificationDto],
   })
-  getAllPending(): NotificationDto[] {
+  async getAllPending(): Promise<NotificationDto[]> {
     return this.notificationsService.getAllPending();
   }
 
@@ -40,7 +40,7 @@ export class NotificationsController {
     isArray: true,
     type: NotificationDto,
   })
-  create(@Body() createNotification: CreateNotificationDto): NotificationDto[] {
+  async create(@Body() createNotification: CreateNotificationDto): Promise<NotificationDto[]> {
     return this.notificationsService.create(createNotification);
   }
 }

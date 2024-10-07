@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { NotificationStatus } from './notifications-status.enum';
 
 /**
- * Data transfer object for a notification
+ * DTO with the notification data
  */
 export class NotificationDto {
   /**

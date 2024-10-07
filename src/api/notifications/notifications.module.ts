@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
+import { NotificationsFakeService } from './notifications-fake.service';
 import { NotificationsController } from './notifications.controller';
-import { NotificationsFakeService, NotificationsService } from './notifications.service';
+import { NotificationsService } from './notifications.service';
 
 /**
  * Module for handling notifications
