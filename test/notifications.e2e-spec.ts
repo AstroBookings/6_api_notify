@@ -13,12 +13,18 @@ describe('/api/notifications', () => {
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
-    }).compile();
+    })
+      .setLogger(console)
+      .compile();
 
     app = moduleFixture.createNestApplication();
     app.useGlobalPipes(new ValidationPipe());
     await app.init();
     http = request(app.getHttpServer());
+  });
+
+  beforeAll(async () => {
+    await http.get('/api/admin/regenerate-db').expect(200);
   });
 
   afterEach(async () => {

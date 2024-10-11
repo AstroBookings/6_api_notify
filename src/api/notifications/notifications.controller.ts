@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateNotificationDto } from './models/create-notification.dto';
 import { NotificationDto } from './models/notification.dto';
-import { NotificationsService } from './notifications.service';
+import { NotificationsAbstractService } from './notifications.abstract.service';
 
 /**
  * Controller for handling notifications
@@ -11,7 +11,7 @@ import { NotificationsService } from './notifications.service';
 @ApiTags('notifications')
 @Controller('api/notifications')
 export class NotificationsController {
-  constructor(private readonly notificationsService: NotificationsService) {}
+  constructor(private readonly notificationsService: NotificationsAbstractService) {}
 
   @Get('ping')
   @ApiOperation({ summary: 'Ping the notifications endpoint' })

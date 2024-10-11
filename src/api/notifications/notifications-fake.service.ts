@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { CreateNotificationDto } from './models/create-notification.dto';
 import { NotificationDto } from './models/notification.dto';
-import { NotificationsService } from './notifications.service';
+import { NotificationsAbstractService } from './notifications.abstract.service';
 
 /**
  * Fake in-memory implementation of NotificationsService
  */
 @Injectable()
-export class NotificationsFakeService extends NotificationsService {
+export class NotificationsFakeService extends NotificationsAbstractService {
   /**
    * Get all pending notifications
    * @returns {NotificationDto[]} - An array of notification DTOs

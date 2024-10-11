@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_FILTER, APP_PIPE } from '@nestjs/core';
+import { AdminModule } from './api/admin/admin.module';
 import { NotificationsModule } from './api/notifications/notifications.module';
 import { envFilePath } from './core/config/config.util';
 import { LogFilter } from './core/log/log.filter';
@@ -42,7 +43,7 @@ export const validationPipeOptions: ValidationPipeOptions = {
 /**
  * Array of API modules to be imported
  */
-const apiModules = [NotificationsModule];
+const apiModules = [AdminModule, NotificationsModule];
 
 @Module({
   imports: [configModule, ...apiModules],

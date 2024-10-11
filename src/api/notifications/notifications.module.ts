@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
-import { NotificationsFakeService } from './notifications-fake.service';
+import { PostgresRepository } from 'src/shared/data/postgres.repository';
+import { NotificationsAbstractService } from './notifications.abstract.service';
 import { NotificationsController } from './notifications.controller';
+import { NotificationsRepository } from './notifications.repository';
 import { NotificationsService } from './notifications.service';
 
 /**
@@ -10,9 +12,11 @@ import { NotificationsService } from './notifications.service';
   controllers: [NotificationsController],
   providers: [
     {
-      provide: NotificationsService,
-      useClass: NotificationsFakeService,
+      provide: NotificationsAbstractService,
+      useClass: NotificationsService,
     },
+    NotificationsRepository,
+    PostgresRepository,
   ],
 })
 export class NotificationsModule {}
