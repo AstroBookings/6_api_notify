@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { PostgresRepository } from 'src/shared/data/postgres.repository';
 import { CreateNotificationDto } from './models/create-notification.dto';
 import { NotificationDto } from './models/notification.dto';
@@ -6,7 +6,10 @@ import { NotificationStatus } from './models/notifications-status.enum';
 
 @Injectable()
 export class NotificationsRepository {
-  constructor(private readonly postgresRepository: PostgresRepository) {}
+  readonly #logger = new Logger(NotificationsRepository.name);
+  constructor(private readonly postgresRepository: PostgresRepository) {
+    this.#logger.verbose('Initialized');
+  }
 
   async selectByStatus(status: NotificationStatus): Promise<NotificationDto[]> {
     const query = `SELECT * FROM notifications WHERE status = $1`;

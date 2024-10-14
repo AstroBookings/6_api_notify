@@ -13,7 +13,7 @@ export class AdminService {
   readonly #connection = this.postgresRepository;
 
   constructor(private readonly postgresRepository: PostgresRepository) {
-    this.#logger.verbose('🚀 AdminService initialized');
+    this.#logger.verbose('Initialized');
   }
 
   /**
@@ -39,17 +39,17 @@ export class AdminService {
 
   async #executeDatabaseScripts(): Promise<void> {
     await this.#connection.query(SQL_SCRIPTS.CLEAR_DATABASE);
-    this.#logger.verbose('🤖 Database cleared');
+    this.#logger.verbose('Database cleared');
     await this.#connection.query(SQL_SCRIPTS.CREATE_DATABASE);
-    this.#logger.verbose('🤖 Database created');
+    this.#logger.verbose('Database created');
     await this.#connection.query(SQL_SCRIPTS.SEED_DATABASE);
-    this.#logger.verbose('🤖 Database seeded');
+    this.#logger.verbose('Database seeded');
   }
 
   // Removed private method #createSuccessResponse as per instructions
 
   #handleDatabaseError(error: Error): AdminResponse {
-    this.#logger.debug('👽 Error regenerating database', error.stack);
+    this.#logger.debug('Error regenerating database', error.stack);
     throw new Error('Failed to regenerate database');
   }
 }

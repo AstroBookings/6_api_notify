@@ -1,22 +1,22 @@
 import { Module } from '@nestjs/common';
-import { PostgresRepository } from 'src/shared/data/postgres.repository';
+import { PostgresModule } from 'src/shared/data/postgres.module';
+import { NotificationsFakeService } from './notifications-fake.service';
 import { NotificationsAbstractService } from './notifications.abstract.service';
 import { NotificationsController } from './notifications.controller';
 import { NotificationsRepository } from './notifications.repository';
-import { NotificationsService } from './notifications.service';
 
 /**
  * Module for handling notifications
  */
 @Module({
+  imports: [PostgresModule],
   controllers: [NotificationsController],
   providers: [
     {
       provide: NotificationsAbstractService,
-      useClass: NotificationsService,
+      useClass: NotificationsFakeService,
     },
     NotificationsRepository,
-    PostgresRepository,
   ],
 })
 export class NotificationsModule {}

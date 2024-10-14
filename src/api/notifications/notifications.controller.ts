@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Post } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateNotificationDto } from './models/create-notification.dto';
 import { NotificationDto } from './models/notification.dto';
@@ -11,7 +11,10 @@ import { NotificationsAbstractService } from './notifications.abstract.service';
 @ApiTags('notifications')
 @Controller('api/notifications')
 export class NotificationsController {
-  constructor(private readonly notificationsService: NotificationsAbstractService) {}
+  readonly #logger = new Logger(NotificationsController.name);
+  constructor(private readonly notificationsService: NotificationsAbstractService) {
+    this.#logger.verbose('Initialized');
+  }
 
   @Get('ping')
   @ApiOperation({ summary: 'Ping the notifications endpoint' })

@@ -22,8 +22,12 @@ export class LogService implements LoggerService {
    */
   error(message: string, context?: string): void {
     this.#formatAndLog('error', message, context);
-    const currentStack = new Error().stack;
-    this.debug(`currentStack: ${currentStack}`, 'LogService');
+    if (context && context.length > 100) {
+      this.debug(context, 'LogService');
+    } else {
+      const currentStack = new Error().stack;
+      this.debug(`currentStack: ${currentStack}`, 'LogService');
+    }
   }
 
   /**

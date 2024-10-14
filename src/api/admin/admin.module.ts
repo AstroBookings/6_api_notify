@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { PostgresRepository } from 'src/shared/data/postgres.repository';
+import { PostgresModule } from 'src/shared/data/postgres.module';
 import { AdminController } from './admin.controller';
 import { AdminService } from './admin.service';
 
@@ -8,8 +8,8 @@ import { AdminService } from './admin.service';
  * @description Module for administrative and maintenance functions
  */
 @Module({
-  imports: [],
+  imports: [PostgresModule],
   controllers: [AdminController],
-  providers: [AdminService, PostgresRepository],
+  providers: [AdminService],
 })
 export class AdminModule {}

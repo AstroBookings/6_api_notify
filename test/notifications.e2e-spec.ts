@@ -24,10 +24,12 @@ describe('/api/notifications', () => {
   });
 
   beforeAll(async () => {
+    // Arrange: Reset database before running tests
     await http.get('/api/admin/regenerate-db').expect(200);
   });
 
   afterEach(async () => {
+    // Cleanup: Close the Nest application after each test
     await app.close();
   });
 
@@ -40,9 +42,12 @@ describe('/api/notifications', () => {
 
   describe('GET /', () => {
     it('should return an array of pending notifications', async () => {
-      const response = await http.get(notificationsUrl).expect(200);
-      expect(Array.isArray(response.body)).toBe(true);
-      response.body.forEach((notification: NotificationDto) => {
+      // Act: Get all pending notifications
+      const actualResponse = await http.get(notificationsUrl).expect(200);
+      const actualBody = actualResponse.body as NotificationDto[];
+      // Assert: Check if the response is an array and has the expected properties
+      expect(Array.isArray(actualBody)).toBe(true);
+      actualBody.forEach((notification: NotificationDto) => {
         expect(notification).toHaveProperty('id');
         expect(notification).toHaveProperty('message');
         expect(notification).toHaveProperty('recipient');
@@ -53,20 +58,23 @@ describe('/api/notifications', () => {
 
   describe('POST /', () => {
     it('should create a new notification', async () => {
+      // Arrange: Create a new notification
       const inputCreateNotificationDto: CreateNotificationDto = {
         templateId: 'tmp_123  ',
         userId: 'usr_123',
         data: JSON.stringify({ bookingId: 'bkn_123' }),
       };
 
-      const response = await http
+      // Act: Send the notification and expect a 201 status code
+      const actualResponse = await http
         .post(notificationsUrl)
         .send(inputCreateNotificationDto)
         .expect(201);
-
-      expect(Array.isArray(response.body)).toBe(true);
-      expect(response.body.length).toBeGreaterThan(0);
-      const createdNotification = response.body[0];
+      const actualBody = actualResponse.body as NotificationDto[];
+      // Assert: Check if the response is an array and has the expected properties
+      expect(Array.isArray(actualBody)).toBe(true);
+      expect(actualBody.length).toBe(1);
+      const createdNotification = actualBody[0];
       expect(createdNotification).toHaveProperty('id');
       expect(createdNotification.templateId).toBe(inputCreateNotificationDto.templateId);
       expect(createdNotification.userId).toBe(inputCreateNotificationDto.userId);
@@ -75,10 +83,12 @@ describe('/api/notifications', () => {
     });
 
     it('should return 400 for invalid input', async () => {
+      // Arrange: Create an invalid notification
       const invalidNotification = {
         template_ID: 'tmp_123  ',
         data: '{"bookingId":"bkn_123"}',
       };
+      // Act & Assert: Send the invalid notification and expect a 422 status code
       await http.post(notificationsUrl).send(invalidNotification).expect(422);
     });
   });
