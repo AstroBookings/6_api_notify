@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateNotificationDto } from './models/create-notification.dto';
+import { CreateNotificationsDto } from './models/create-notification.dto';
 import { NotificationDto } from './models/notification.dto';
 import { NotificationsAbstractService } from './notifications.abstract.service';
 import { NotificationsRepository } from './notifications.repository';
@@ -24,18 +24,18 @@ export class NotificationsFakeService extends NotificationsAbstractService {
 
   /**
    * Create new notifications based on a template event
-   * @param {CreateNotificationDto} createNotification - The notification data transfer object
+   * @param {CreateNotificationsDto} createNotification - The notification data transfer object
    * @returns {Promise<NotificationDto[]>} - An array of notification DTOs
    */
-  async create(createNotification: CreateNotificationDto): Promise<NotificationDto[]> {
+  async create(createNotification: CreateNotificationsDto): Promise<NotificationDto[]> {
     // Gets template from templateId
     // Gets source and recipient from data
     // For each recipient:
     // - Fill subject and message from template
     // - Save notification
     // - Return notification array
-    const notifications: NotificationDto[] = [];
-    const notification: NotificationDto = {
+    const newNotifications: NotificationDto[] = [];
+    const newNotification: NotificationDto = {
       id: 'ntf_123',
       templateId: createNotification.templateId,
       userId: createNotification.userId,
@@ -47,11 +47,11 @@ export class NotificationsFakeService extends NotificationsAbstractService {
       updatedAt: new Date(),
       status: 'pending',
     };
-    notifications.push(notification);
+    newNotifications.push(newNotification);
 
-    for (const notification of notifications) {
+    for (const notification of newNotifications) {
       await this.notificationsRepository.insert(notification);
     }
-    return notifications;
+    return newNotifications;
   }
 }

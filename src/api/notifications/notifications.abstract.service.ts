@@ -1,4 +1,4 @@
-import { CreateNotificationDto } from './models/create-notification.dto';
+import { CreateNotificationsDto } from './models/create-notification.dto';
 import { NotificationDto } from './models/notification.dto';
 
 /**
@@ -6,5 +6,5 @@ import { NotificationDto } from './models/notification.dto';
  */
 export abstract class NotificationsAbstractService {
   abstract getAllPending(): Promise<NotificationDto[]>;
-  abstract create(notification: CreateNotificationDto): Promise<NotificationDto[]>;
+  abstract create(notification: CreateNotificationsDto): Promise<NotificationDto[]>;
 }

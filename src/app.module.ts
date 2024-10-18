@@ -1,3 +1,10 @@
+import { AdminModule } from '@ab/api/admin/admin.module';
+import { NotificationsModule } from '@ab/api/notifications/notifications.module';
+import { envFilePath } from '@ab/config/config.util';
+import { nonApiRoutesMiddleware } from '@ab/core/middleware/non-api-routes.middleware';
+import { LogFilter } from '@ab/log/log.filter';
+import { logMiddleware } from '@ab/log/log.middleware';
+import { LogService } from '@ab/log/log.service';
 import {
   HttpStatus,
   Logger,
@@ -9,13 +16,6 @@ import {
 } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_FILTER, APP_PIPE } from '@nestjs/core';
-import { AdminModule } from './api/admin/admin.module';
-import { NotificationsModule } from './api/notifications/notifications.module';
-import { envFilePath } from './core/config/config.util';
-import { LogFilter } from './core/log/log.filter';
-import { logMiddleware } from './core/log/log.middleware';
-import { LogService } from './core/log/log.service';
-import { nonApiRoutesMiddleware } from './core/middleware/non-api-routes.middleware';
 
 /**
  * Configuration options for the ConfigModule

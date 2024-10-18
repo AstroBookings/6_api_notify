@@ -1,6 +1,5 @@
+import { PostgresRepository } from '@ab/data/postgres.repository';
 import { Injectable, Logger } from '@nestjs/common';
-import { PostgresRepository } from 'src/shared/data/postgres.repository';
-import { AdminResponse } from './admin-response.dto';
 import { SQL_SCRIPTS } from './admin.config';
 
 /**
@@ -20,36 +19,40 @@ export class AdminService {
    * Regenerates the database by executing SQL scripts
    * @returns Object with the operation status and message
    */
-  async regenerateDatabase(): Promise<AdminResponse> {
-    try {
-      await this.#executeDatabaseScripts();
-      return { status: 'success', message: 'Database regenerated successfully' };
-    } catch (error) {
-      return this.#handleDatabaseError(error);
-    }
+  async regenerateDatabase(): Promise<string> {
+    await this.#executeDatabaseScripts();
+    return 'Database regenerated successfully';
   }
 
   /**
-   * Test method to verify the service functionality
-   * @returns Object with the operation status and message
+   * Test method to verify the service availability
+   * @returns Success pong response
    */
-  async adminTest(): Promise<AdminResponse> {
-    return { status: 'success', message: 'Admin test endpoint is working correctly' };
+  async pong(): Promise<string> {
+    return 'pong';
   }
 
   async #executeDatabaseScripts(): Promise<void> {
-    await this.#connection.query(SQL_SCRIPTS.CLEAR_DATABASE);
-    this.#logger.verbose('Database cleared');
-    await this.#connection.query(SQL_SCRIPTS.CREATE_DATABASE);
-    this.#logger.verbose('Database created');
-    await this.#connection.query(SQL_SCRIPTS.SEED_DATABASE);
-    this.#logger.verbose('Database seeded');
-  }
-
-  // Removed private method #createSuccessResponse as per instructions
-
-  #handleDatabaseError(error: Error): AdminResponse {
-    this.#logger.debug('Error regenerating database', error.stack);
-    throw new Error('Failed to regenerate database');
+    try {
+      await this.#connection.query(SQL_SCRIPTS.CLEAR_DATABASE);
+      this.#logger.verbose('Database cleared');
+    } catch (error) {
+      this.#logger.verbose('Error clearing database', SQL_SCRIPTS.CLEAR_DATABASE);
+      throw new Error('Failed to clear database');
+    }
+    try {
+      await this.#connection.query(SQL_SCRIPTS.CREATE_DATABASE);
+      this.#logger.verbose('Database created');
+    } catch (error) {
+      this.#logger.error('Error creating database', SQL_SCRIPTS.CREATE_DATABASE);
+      throw new Error('Failed to create database');
+    }
+    try {
+      await this.#connection.query(SQL_SCRIPTS.SEED_DATABASE);
+      this.#logger.verbose('Database seeded');
+    } catch (error) {
+      this.#logger.verbose('Error seeding database', SQL_SCRIPTS.SEED_DATABASE);
+      throw new Error('Failed to seed database');
+    }
   }
 }

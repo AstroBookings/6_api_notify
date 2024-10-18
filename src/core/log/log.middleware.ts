@@ -1,6 +1,6 @@
+import { convertToKB } from '@ab/utils/size-converter.util';
 import { Logger } from '@nestjs/common';
 import { NextFunction, Request, Response } from 'express';
-import { convertToKB } from 'src/shared/utils/size-converter.util';
 import { wrapStatusWithColor } from './log-colors.util';
 
 /**
@@ -27,18 +27,3 @@ export function logMiddleware(req: Request, res: Response, next: NextFunction) {
   // Continue to the next middleware
   next();
 }
-
-// Moved to shared/utils/size-converter.util.ts
-
-/* const KB = 1024;
-/**
- * Converts bytes to KB when more than 1024
- * @param bytes - The number of bytes to convert
- * @returns A string representation of the size in B or KB
- */
-/*
-export function convertToKB(bytes: number): string {
-  if (bytes <= KB) return `${bytes}Bs`;
-  return `${(bytes / KB).toFixed(2)}KBs`;
-}
- */

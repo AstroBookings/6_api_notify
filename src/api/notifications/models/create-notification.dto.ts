@@ -2,27 +2,30 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsString } from 'class-validator';
 
 /**
- * DTO for creating a notification that will be sent to a recipient or a group of recipients
+ * DTO for creating notifications that will be sent to recipients of an event
  */
-export class CreateNotificationDto {
+export class CreateNotificationsDto {
   /**
-   * The unique identifier for the template used to create the notification
+   * The identifier for the template used to create the notifications.
+   * It is like an event name.
+   * @example 'tpl_123'
    */
   @ApiProperty({ example: 'tpl_123' })
   @IsString()
   templateId: string;
 
   /**
-   * The unique identifier for the user who is creating the notification
+   * The user who is creating the notifications
+   * @example 'usr_123'
    */
   @ApiProperty({ example: 'usr_123' })
   @IsString()
   userId: string;
 
   /**
-   * The data associated with the notification
+   * The data associated with the event. Could be a booking, a launch, etc.
+   * @example '{"bookingId": "bkn_123"}'
    */
-  @ApiProperty({ example: '{"bookingId": "bkn_123"}' })
   @IsString()
   data: string;
 }

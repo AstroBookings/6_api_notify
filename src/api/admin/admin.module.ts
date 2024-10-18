@@ -1,5 +1,5 @@
+import { PostgresModule } from '@ab/shared/data/postgres.module';
 import { Module } from '@nestjs/common';
-import { PostgresModule } from 'src/shared/data/postgres.module';
 import { AdminController } from './admin.controller';
 import { AdminService } from './admin.service';
 

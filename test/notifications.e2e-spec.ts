@@ -2,7 +2,7 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 import TestAgent from 'supertest/lib/agent';
-import { CreateNotificationDto } from '../src/api/notifications/models/create-notification.dto';
+import { CreateNotificationsDto } from '../src/api/notifications/models/create-notification.dto';
 import { NotificationDto } from '../src/api/notifications/models/notification.dto';
 import { AppModule } from '../src/app.module';
 describe('/api/notifications', () => {
@@ -59,7 +59,7 @@ describe('/api/notifications', () => {
   describe('POST /', () => {
     it('should create a new notification', async () => {
       // Arrange: Create a new notification
-      const inputCreateNotificationDto: CreateNotificationDto = {
+      const inputCreateNotificationDto: CreateNotificationsDto = {
         templateId: 'tmp_123  ',
         userId: 'usr_123',
         data: JSON.stringify({ bookingId: 'bkn_123' }),

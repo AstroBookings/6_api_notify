@@ -1,6 +1,6 @@
+import { cleanText } from '@ab/utils/text-cleaner.util';
 import { Injectable, LoggerService, LogLevel } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { cleanText } from 'src/shared/utils/text-cleaner.util';
 import {
   wrapContextWithColor,
   wrapMessageWithColor,

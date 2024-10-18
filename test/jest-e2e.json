@@ -5,5 +5,15 @@
   "testRegex": ".e2e-spec.ts$",
   "transform": {
     "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "moduleNameMapper": {
+    "^@ab/api/(.*)$": "<rootDir>/../src/api/$1",
+    "^@ab/log/(.*)$": "<rootDir>/../src/core/log/$1",
+    "^@ab/config/(.*)$": "<rootDir>/../src/core/config/$1",
+    "^@ab/utils/(.*)$": "<rootDir>/../src/shared/utils/$1",
+    "^@ab/auth/(.*)$": "<rootDir>/../src/shared/auth/$1",
+    "^@ab/data/(.*)$": "<rootDir>/../src/shared/data/$1",
+    "^@ab/token/(.*)$": "<rootDir>/../src/shared/token/$1",
+    "^@ab/(.*)$": "<rootDir>/../src/$1"
   }
 }

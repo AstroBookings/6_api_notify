@@ -16,6 +16,16 @@
     "noImplicitAny": true,
     "strictBindCallApply": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@ab/api/*": ["src/api/*"],
+      "@ab/log/*": ["src/core/log/*"],
+      "@ab/config/*": ["src/core/config/*"],
+      "@ab/utils/*": ["src/shared/utils/*"],
+      "@ab/auth/*": ["src/shared/auth/*"],
+      "@ab/data/*": ["src/shared/data/*"],
+      "@ab/token/*": ["src/shared/token/*"],
+      "@ab/*": ["src/*"] // Added general path for all modules
+    }
   }
 }

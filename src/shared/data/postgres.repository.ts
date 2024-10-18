@@ -54,8 +54,3 @@ export class PostgresRepository {
     return this.#client.query(query, args);
   }
 }
-
-// To do:
-// https://github.com/AstroBookings/notify_api/blob/main/test/5_0-operations-clear.sql
-
-// https://github.com/AstroBookings/notify_api/blob/main/test/5_1-operations-create.sql
