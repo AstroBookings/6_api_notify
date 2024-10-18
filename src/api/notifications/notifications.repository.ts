@@ -1,6 +1,5 @@
 import { PostgresRepository } from '@ab/data/postgres.repository';
 import { Injectable, Logger } from '@nestjs/common';
-import { CreateNotificationsDto } from './models/create-notification.dto';
 import { NotificationDto } from './models/notification.dto';
 import { NotificationStatus } from './models/notifications-status.enum';
 
@@ -27,16 +26,23 @@ export class NotificationsRepository {
 
   /**
    * Insert a new notification into the database
-   * @param {CreateNotificationsDto} notification - The notification data transfer object
+   * @param {NotificationDto} notification - The notification data transfer object
    * @returns {Promise<NotificationDto>} - The inserted notification DTO
    */
-  async insert(notification: CreateNotificationsDto): Promise<NotificationDto> {
-    const query = `INSERT INTO notifications (template_id, user_id, data, status) VALUES ($1, $2, $3, $4) RETURNING *`;
+  async insert(notification: NotificationDto): Promise<NotificationDto> {
+    const query = `INSERT INTO notifications 
+    (id, template_id, user_id, data, recipient, subject, message, status)
+    VALUES
+    ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`;
     const result = await this.postgresRepository.query(query, [
+      notification.id,
       notification.templateId,
       notification.userId,
       notification.data,
-      'pending',
+      notification.recipient,
+      notification.subject,
+      notification.message,
+      notification.status,
     ]);
     return result.rows[0] as NotificationDto;
   }

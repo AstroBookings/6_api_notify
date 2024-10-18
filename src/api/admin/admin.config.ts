@@ -106,6 +106,7 @@ CREATE TABLE notifications (
   user_id TEXT NOT NULL ,
   subject TEXT NOT NULL,
   message TEXT NOT NULL,
+  recipient TEXT NOT NULL,
   data JSON,
   created_at TIMESTAMP DEFAULT NOW(),
   updated_at TIMESTAMP ,
@@ -168,9 +169,9 @@ VALUES
   ('tmpl_3', 'invoice_issued', 'Invoice {number} Issued for launch {mission}', 'The invoice {number} for the launch {mission} to {destination} has been issued. \n The total price is {amount}. \n Please pay within 30 days.');
 
 -- Notifications
-INSERT INTO notifications (id, template_id, user_id, subject, message, data, status)
+INSERT INTO notifications (id, template_id, user_id, subject, message, recipient, data, status)
 VALUES 
-  ('notif_1', 'tmpl_1', 'usr_t1', 'Booking Confirmation', 'Your booking for 1 seat(s) on the launch to Moon on 2025-07-20 has been confirmed.', '{"launch_id": "lnch_1", "destination": "Moon", "date": "2025-07-20"}', 'sent'),
-  ('notif_2', 'tmpl_2', 'usr_a1', 'Launch Scheduled', 'The launch has been scheduled for 2026-01-01.', '{"launch_id": "lnch_3", "date": "2026-01-01"}', 'pending');
+  ('notif_1', 'tmpl_1', 'usr_t1', 'Booking Confirmation', 'Your booking for 1 seat(s) on the launch to Moon on 2025-07-20 has been confirmed.', 'john.doe@email.com', '{"launch_id": "lnch_1", "destination": "Moon", "date": "2025-07-20"}', 'sent'),
+  ('notif_2', 'tmpl_2', 'usr_a1', 'Launch Scheduled', 'The launch has been scheduled for 2026-01-01.', 'info@spacex.com', '{"launch_id": "lnch_3", "date": "2026-01-01"}', 'pending');
 `,
 } as const;

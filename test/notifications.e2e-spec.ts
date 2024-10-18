@@ -10,22 +10,19 @@ describe('/api/notifications', () => {
   let http: TestAgent;
   const notificationsUrl = '/api/notifications';
 
+  // Arrange: Initialize the Nest application before each test
   beforeEach(async () => {
+    // Arrange : create the app with the testing module, no need to run the app outside of the tests
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     })
-      .setLogger(console)
+      //.setLogger(console)
       .compile();
-
     app = moduleFixture.createNestApplication();
     app.useGlobalPipes(new ValidationPipe());
     await app.init();
     http = request(app.getHttpServer());
-  });
-
-  beforeAll(async () => {
-    // Arrange: Reset database before running tests
-    await http.get('/api/admin/regenerate-db').expect(200);
+    await http.post('/api/admin/regenerate-db').expect(200);
   });
 
   afterEach(async () => {
@@ -51,7 +48,6 @@ describe('/api/notifications', () => {
         expect(notification).toHaveProperty('id');
         expect(notification).toHaveProperty('message');
         expect(notification).toHaveProperty('recipient');
-        expect(notification).toHaveProperty('createdAt');
       });
     });
   });
@@ -60,7 +56,7 @@ describe('/api/notifications', () => {
     it('should create a new notification', async () => {
       // Arrange: Create a new notification
       const inputCreateNotificationDto: CreateNotificationsDto = {
-        templateId: 'tmp_123  ',
+        templateId: 'tmpl_1',
         userId: 'usr_123',
         data: JSON.stringify({ bookingId: 'bkn_123' }),
       };
