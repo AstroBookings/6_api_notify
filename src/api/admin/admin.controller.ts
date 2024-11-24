@@ -22,6 +22,7 @@ export class AdminController {
     return this.adminService.pong();
   }
 
+  @Get('regenerate-db')
   @Post('regenerate-db')
   @HttpCode(200)
   @ApiOperation({ summary: 'Regenerate the database', description: 'Use before starting tests' })

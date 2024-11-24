@@ -172,6 +172,8 @@ VALUES
 INSERT INTO notifications (id, template_id, user_id, subject, message, recipient, data, status)
 VALUES 
   ('notif_1', 'tmpl_1', 'usr_t1', 'Booking Confirmation', 'Your booking for 1 seat(s) on the launch to Moon on 2025-07-20 has been confirmed.', 'john.doe@email.com', '{"launch_id": "lnch_1", "destination": "Moon", "date": "2025-07-20"}', 'sent'),
-  ('notif_2', 'tmpl_2', 'usr_a1', 'Launch Scheduled', 'The launch has been scheduled for 2026-01-01.', 'info@spacex.com', '{"launch_id": "lnch_3", "date": "2026-01-01"}', 'pending');
+  ('notif_2', 'tmpl_2', 'usr_a1', 'Launch Scheduled', 'The launch has been scheduled for 2026-01-01.', 'info@spacex.com', '{"launch_id": "lnch_3", "date": "2026-01-01"}', 'pending'),
+  ('notif_3', 'tmpl_3', 'usr_a1', 'Invoice Issued', 'The invoice for the launch Red Planet has been issued.', 'info@spacex.com', '{"launch_id": "lnch_3"}', 'pending'),
+  ('notif_4', 'tmpl_1', 'usr_t2', 'Booking Confirmation', 'Your booking for 2 seat(s) on the launch to Earth on 2025-09-15 has been confirmed.', 'emma.smith@email.co.uk', '{"launch_id": "lnch_2", "destination": "Earth", "date": "2025-09-15"}', 'pending');
 `,
 } as const;
