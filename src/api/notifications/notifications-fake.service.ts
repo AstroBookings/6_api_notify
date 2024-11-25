@@ -22,6 +22,11 @@ export class NotificationsFakeService extends NotificationsAbstractService {
     return this.notificationsRepository.selectByStatus('pending');
   }
 
+  /**
+   * Get a notification by id
+   * @param {string} id - The id of the notification
+   * @returns {Promise<NotificationDto>} - The notification DTO
+   */
   async getById(id: string): Promise<NotificationDto> {
     return this.notificationsRepository.selectById(id);
   }

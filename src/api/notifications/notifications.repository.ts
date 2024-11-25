@@ -24,6 +24,11 @@ export class NotificationsRepository {
     return result.rows as NotificationDto[];
   }
 
+  /**
+   * Select a notification by id
+   * @param {string} id - The id of the notification
+   * @returns {Promise<NotificationDto>} - The notification DTO
+   */
   async selectById(id: string): Promise<NotificationDto> {
     const query = `SELECT * FROM notifications WHERE id = $1`;
     const result = await this.postgresRepository.query(query, [id]);
