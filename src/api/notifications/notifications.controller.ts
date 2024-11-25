@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Logger, Post } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Param, Post } from '@nestjs/common';
 import { ApiBody, ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CreateNotificationsDto } from './models/create-notification.dto';
 import { NotificationDto } from './models/notification.dto';
@@ -32,6 +32,16 @@ export class NotificationsController {
   })
   async getAllPending(): Promise<NotificationDto[]> {
     return this.notificationsService.getAllPending();
+  }
+
+  @Get(':id')
+  @ApiOperation({ summary: 'Get a notification by id' })
+  @ApiOkResponse({
+    description: 'The notification',
+    type: NotificationDto,
+  })
+  async getById(@Param('id') id: string): Promise<NotificationDto> {
+    return this.notificationsService.getById(id);
   }
 
   @Post()

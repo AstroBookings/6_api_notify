@@ -24,6 +24,12 @@ export class NotificationsRepository {
     return result.rows as NotificationDto[];
   }
 
+  async selectById(id: string): Promise<NotificationDto> {
+    const query = `SELECT * FROM notifications WHERE id = $1`;
+    const result = await this.postgresRepository.query(query, [id]);
+    return result.rows[0] as NotificationDto;
+  }
+
   /**
    * Insert a new notification into the database
    * @param {NotificationDto} notification - The notification data transfer object

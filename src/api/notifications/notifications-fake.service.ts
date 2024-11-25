@@ -22,6 +22,10 @@ export class NotificationsFakeService extends NotificationsAbstractService {
     return this.notificationsRepository.selectByStatus('pending');
   }
 
+  async getById(id: string): Promise<NotificationDto> {
+    return this.notificationsRepository.selectById(id);
+  }
+
   /**
    * Create new notifications based on a template event
    * @param {CreateNotificationsDto} createNotification - The notification data transfer object

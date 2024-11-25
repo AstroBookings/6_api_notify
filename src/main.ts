@@ -16,6 +16,7 @@ async function bootstrap() {
     bufferLogs: true,
     logger,
   });
+  app.enableCors();
   buildSwaggerDocumentation(app);
   const appConfig: AppConfig = getAppConfig(app);
   logger.log(`📚 ${appConfig.host}:${appConfig.port}/docs`, 'Bootstrap');
